@@ -78,7 +78,7 @@ class LkkLogger(logging.Logger):
             extra=extra,
         )
         if console is True and self.consoleAttach is False:
-            print(self.__stream.getvalue())
+            print(self.__stream.getvalue(), end="")
         self.__stream.seek(0)
         self.__stream.truncate(0)
 
@@ -101,7 +101,7 @@ class LkkLogger(logging.Logger):
             extra=extra,
         )
         if console is True and self.consoleAttach is False:
-            print(self.__stream.getvalue())
+            print(self.__stream.getvalue(), end="")
         self.__stream.seek(0)
         self.__stream.truncate(0)
 
@@ -124,7 +124,7 @@ class LkkLogger(logging.Logger):
             extra=extra,
         )
         if console is True and self.consoleAttach is False:
-            print(self.__stream.getvalue())
+            print(self.__stream.getvalue(), end="")
         self.__stream.seek(0)
         self.__stream.truncate(0)
 
@@ -147,7 +147,7 @@ class LkkLogger(logging.Logger):
             extra=extra,
         )
         if console is True and self.consoleAttach is False:
-            print(self.__stream.getvalue())
+            print(self.__stream.getvalue(), end="")
         self.__stream.seek(0)
         self.__stream.truncate(0)
 
@@ -170,7 +170,7 @@ class LkkLogger(logging.Logger):
             extra=extra,
         )
         if console is True and self.consoleAttach is False:
-            print(self.__stream.getvalue())
+            print(self.__stream.getvalue(), end="")
         self.__stream.seek(0)
         self.__stream.truncate(0)
 
