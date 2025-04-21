@@ -9,7 +9,7 @@ loglevels = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 warnings.filterwarnings("default", category=DeprecationWarning)
 
 
-class LkkLogger(logging.Logger):
+class LkkLogger:
     def __init__(
         self,
         name: str,
@@ -36,7 +36,8 @@ class LkkLogger(logging.Logger):
         self.fileAttach = fileAttach
         self.level = level
         self.fileLevel = fileLevel
-        super().__init__(self.name, logging.DEBUG)
+        self.__logger = logging.getLogger(self.name)
+        self.__logger.setLevel(logging.DEBUG)
         self.__customInit()
 
     def __customInit(self):
@@ -47,17 +48,17 @@ class LkkLogger(logging.Logger):
         self.__stream_handler = logging.StreamHandler(self.__stream)
         self.__stream_handler.setLevel(logging.DEBUG)
         self.__stream_handler.setFormatter(formatter)
-        self.addHandler(self.__stream_handler)
+        self.__logger.addHandler(self.__stream_handler)
         if self.consoleAttach:
             consoleHandler = logging.StreamHandler()
             consoleHandler.setLevel(self.level)
             consoleHandler.setFormatter(formatter)
-            self.addHandler(consoleHandler)
+            self.__logger.addHandler(consoleHandler)
         if self.fileAttach:
             fileHandler = logging.FileHandler(self.filename + ".log", encoding="utf-8")
             fileHandler.setLevel(self.fileLevel)
             fileHandler.setFormatter(formatter)
-            self.addHandler(fileHandler)
+            self.__logger.addHandler(fileHandler)
 
     def debug(
         self,
@@ -69,7 +70,9 @@ class LkkLogger(logging.Logger):
         extra=None,
         console: bool = ...,
     ):
-        super().debug(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.debug(
             msg,
             *args,
             exc_info=exc_info,
@@ -79,8 +82,6 @@ class LkkLogger(logging.Logger):
         )
         if console is True and self.consoleAttach is False:
             print(self.__stream.getvalue(), end="")
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def info(
         self,
@@ -92,7 +93,9 @@ class LkkLogger(logging.Logger):
         extra=None,
         console: bool = ...,
     ):
-        super().info(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.info(
             msg,
             *args,
             exc_info=exc_info,
@@ -102,8 +105,6 @@ class LkkLogger(logging.Logger):
         )
         if console is True and self.consoleAttach is False:
             print(self.__stream.getvalue(), end="")
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def warning(
         self,
@@ -115,7 +116,9 @@ class LkkLogger(logging.Logger):
         extra=None,
         console: bool = ...,
     ):
-        super().warning(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.warning(
             msg,
             *args,
             exc_info=exc_info,
@@ -125,8 +128,6 @@ class LkkLogger(logging.Logger):
         )
         if console is True and self.consoleAttach is False:
             print(self.__stream.getvalue(), end="")
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def error(
         self,
@@ -138,7 +139,9 @@ class LkkLogger(logging.Logger):
         extra=None,
         console: bool = ...,
     ):
-        super().error(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.error(
             msg,
             *args,
             exc_info=exc_info,
@@ -148,8 +151,6 @@ class LkkLogger(logging.Logger):
         )
         if console is True and self.consoleAttach is False:
             print(self.__stream.getvalue(), end="")
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def critical(
         self,
@@ -161,7 +162,9 @@ class LkkLogger(logging.Logger):
         extra=None,
         console: bool = ...,
     ):
-        super().critical(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.critical(
             msg,
             *args,
             exc_info=exc_info,
@@ -171,13 +174,13 @@ class LkkLogger(logging.Logger):
         )
         if console is True and self.consoleAttach is False:
             print(self.__stream.getvalue(), end="")
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def exception(
         self, msg, *args, exc_info=True, stack_info=False, stacklevel=1, extra=None
     ):
-        super().exception(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.exception(
             msg,
             *args,
             exc_info=exc_info,
@@ -185,8 +188,6 @@ class LkkLogger(logging.Logger):
             stacklevel=stacklevel,
             extra=extra,
         )
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
     def log(
         self,
@@ -198,7 +199,9 @@ class LkkLogger(logging.Logger):
         stacklevel=1,
         extra=None,
     ):
-        super().log(
+        self.__stream.seek(0)
+        self.__stream.truncate(0)
+        self.__logger.log(
             level,
             msg,
             *args,
@@ -207,8 +210,6 @@ class LkkLogger(logging.Logger):
             stacklevel=stacklevel,
             extra=extra,
         )
-        self.__stream.seek(0)
-        self.__stream.truncate(0)
 
 
 def loggerhandler(
