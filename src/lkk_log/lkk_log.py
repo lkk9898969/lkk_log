@@ -1,6 +1,6 @@
 import logging
 import warnings
-from typing import Literal
+from typing import Literal, Mapping
 from io import StringIO
 from pathlib import Path
 
@@ -62,12 +62,12 @@ class LkkLogger:
 
     def debug(
         self,
-        msg,
-        *args,
-        exc_info=None,
+        msg: object,
+        *args: object,
+        exc_info: logging._ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
-        extra=None,
+        extra: Mapping[str, object] = None,
         console: bool = ...,
     ):
         self.__stream.seek(0)
@@ -85,12 +85,12 @@ class LkkLogger:
 
     def info(
         self,
-        msg,
-        *args,
-        exc_info=None,
+        msg: object,
+        *args: object,
+        exc_info: logging._ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
-        extra=None,
+        extra: Mapping[str, object] = None,
         console: bool = ...,
     ):
         self.__stream.seek(0)
@@ -108,12 +108,12 @@ class LkkLogger:
 
     def warning(
         self,
-        msg,
-        *args,
-        exc_info=None,
+        msg: object,
+        *args: object,
+        exc_info: logging._ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
-        extra=None,
+        extra: Mapping[str, object] = None,
         console: bool = ...,
     ):
         self.__stream.seek(0)
@@ -131,12 +131,12 @@ class LkkLogger:
 
     def error(
         self,
-        msg,
-        *args,
-        exc_info=None,
+        msg: object,
+        *args: object,
+        exc_info: logging._ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
-        extra=None,
+        extra: Mapping[str, object] = None,
         console: bool = ...,
     ):
         self.__stream.seek(0)
@@ -154,12 +154,12 @@ class LkkLogger:
 
     def critical(
         self,
-        msg,
-        *args,
-        exc_info=None,
+        msg: object,
+        *args: object,
+        exc_info: logging._ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
-        extra=None,
+        extra: Mapping[str, object] = None,
         console: bool = ...,
     ):
         self.__stream.seek(0)
