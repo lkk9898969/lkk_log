@@ -6,9 +6,10 @@ README = open(os.path.join(here, "README.rst")).read()
 NEWS = open(os.path.join(here, "NEWS.txt")).read()
 
 
-version = "1.4"
+version = "1.4.1"
 
 install_requires = [
+    "typing_extensions"
     # List your project dependencies here.
     # For more details, see:
     # http://packages.python.org/distribute/setuptools.html#declaring-dependencies

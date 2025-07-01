@@ -1,8 +1,18 @@
 import logging
 import warnings
-from typing import Literal, Mapping
 from io import StringIO
 from pathlib import Path
+
+from types import TracebackType
+from typing import Literal, Mapping
+from typing_extensions import TypeAlias
+
+
+_SysExcInfoType: TypeAlias = (
+    tuple[type[BaseException], BaseException, TracebackType | None]
+    | tuple[None, None, None]
+)
+_ExcInfoType: TypeAlias = None | bool | _SysExcInfoType | BaseException
 
 loglevels = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
@@ -64,7 +74,7 @@ class LkkLogger:
         self,
         msg: object,
         *args: object,
-        exc_info: logging._ExcInfoType = None,
+        exc_info: _ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
         extra: Mapping[str, object] = None,
@@ -87,7 +97,7 @@ class LkkLogger:
         self,
         msg: object,
         *args: object,
-        exc_info: logging._ExcInfoType = None,
+        exc_info: _ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
         extra: Mapping[str, object] = None,
@@ -110,7 +120,7 @@ class LkkLogger:
         self,
         msg: object,
         *args: object,
-        exc_info: logging._ExcInfoType = None,
+        exc_info: _ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
         extra: Mapping[str, object] = None,
@@ -133,7 +143,7 @@ class LkkLogger:
         self,
         msg: object,
         *args: object,
-        exc_info: logging._ExcInfoType = None,
+        exc_info: _ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
         extra: Mapping[str, object] = None,
@@ -156,7 +166,7 @@ class LkkLogger:
         self,
         msg: object,
         *args: object,
-        exc_info: logging._ExcInfoType = None,
+        exc_info: _ExcInfoType = None,
         stack_info=False,
         stacklevel=1,
         extra: Mapping[str, object] = None,
